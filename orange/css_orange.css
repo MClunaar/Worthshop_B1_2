@@ -1,0 +1,210 @@
+body {
+	font-family:'Ubuntu';
+	padding: 0px;
+	margin:0px;
+	background-color: rgb(250,250,250);
+}
+
+.identificationlink {
+	font-size:100%;
+	text-align:center;
+	font-family:'Source Sans Pro';
+	float:right;
+	margin-right:1%;
+	margin-top:1%
+}
+
+.navigbuttons {
+	font-size:100%;
+	text-align:right;
+	font-family:'Source Sans Pro';
+	float:right;
+	margin-top:1%;
+	margin-right:1%;
+	height:50%;
+	width:50%;
+}
+
+.navigbuttonstype {
+	font-size:150%;
+	text-align:center;
+	font-family:'ubuntu';
+	float:center;
+	margin-top:1%;
+	margin-right:1%;
+	height:50%;
+	width:50%;
+}
+
+.typebutton {
+	border: 2px solid rgb(220, 227, 227);
+	border-radius:3px;
+    color: rgb(255, 174, 124);
+	background-color: rgb(255,255,255) ;
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 20px;
+	margin-top:5%;
+	margin-right:1%;
+	margin-left: 1%;
+	width: 14%;
+}
+.typebutton:hover {
+    background-color: rgb(200,200,200);
+    color: white;
+	-webkit-transition-duration: 0.4s; /* Pour les pigeons */
+    transition-duration: 0.2s;
+}
+
+.button {
+	border: 2px solid rgb(230, 247, 247);
+	border-radius:4px;
+    color: white;
+	background-color: rgb(255, 174, 124);
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	margin-top:0.8%;
+	margin-right:0.5%;
+	margin-left: 0.5%;
+	width: 12%;
+}
+.button:hover {
+    background-color: white;
+    color: grey;
+	-webkit-transition-duration: 0.4s; /* Pour les pigeons */
+    transition-duration: 0.4s;
+}
+
+.currentbutton {
+	border: 2px solid rgb(230, 247, 247);
+	border-radius:4px;
+    color: grey;
+	background-color: rgb(255, 255, 255);
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	margin-top:0.8%;
+	margin-right:0.5%;
+	margin-left: 0.5%;
+	width: 12%;
+}
+.currentbutton:hover {
+    background-color: white;
+    color: grey;
+	-webkit-transition-duration: 0.4s; /* Pour les pigeons */
+    transition-duration: 0.4s;
+}
+
+.connectbutton {
+	border: 2px solid rgb(230, 247, 247);
+	border-radius:4px;
+    color: white;
+	background-color: rgb(255, 174, 124);
+    padding: 5px 15px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+	margin-right:0.5%;
+	margin-left: 0.5%;
+	width: 12%;
+}
+.connectbutton:hover {
+    background-color: white;
+    color: grey;
+	-webkit-transition-duration: 0.4s; /* Pour les pigeons */
+    transition-duration: 0.4s;
+}
+
+
+
+.champs {
+	font-size:200%;
+	text-align:center;
+	font-family:'Source Sans Pro';
+	padding-right:0%;
+	padding-top:0%;
+}
+
+.titre {
+	font-size:250%;
+	font-weight:700;
+	margin-left:0.5%;
+	margin-right:0px;
+	margin-top:1%;
+	margin-bottom:1%;
+	padding:0px;
+	padding-top:0%;
+	height:100%;
+	width:40%;
+	float:left;
+	text-shadow: 2px 2px #000000;
+	overflow:show;
+}
+
+.titlebutton {
+	border: none;
+    color: white;
+    padding: 5px 15px;
+    text-decoration: none;
+    display: inline-block;
+}
+
+.banner {
+	background-color: rgb(255, 164, 104);
+    padding: 0px;
+    color: white;
+	height:10%;
+	margin:0px;
+}
+
+.bannercontent {
+	position: absolute;
+	margin: 0;
+	width:100%;
+	height:10%;
+	overflow:hidden;
+	display:inline-block;
+}
+
+.connexion { 
+	font-size:5px;
+	text-align:right;
+	height:auto;
+	width:10%;
+	margin:0px;
+	float:center;
+	padding-right:1%;
+	padding-top:1%;
+}
+
+.connexion p {
+	text-align:center;
+}
+
+.connecte { 
+	text-align:right;
+	font-size:80%;
+	height:0.1%;
+	width:auto%;
+	margin:0px;
+	float:center;
+	padding-right:0.8%;
+	padding-top:0.3%;
+}
+
+.form_connexion {
+	font-size:100%;
+	text-align:center;
+	margin:0px;
+	width:30%;
+	height:auto;
+	padding-top:2%;
+}
