@@ -8,7 +8,7 @@ CREATE TABLE Marche(
         code_marche  Varchar (25) NOT NULL ,
         date_marche Date ,
         Lieu        Varchar (25) ,
-       CONSTRAINT pk_Marche PRIMARY KEY (code_marche ),
+      CONSTRAINT pk_Marche PRIMARY KEY (code_marche ),
 	   CONSTRAINT fk_Marche FOREIGN KEY (Lieu) REFERENCES Lieu (Lieu)
 );
 
@@ -29,19 +29,16 @@ CREATE TABLE ADHERENT(
  
 CREATE TABLE Payer_Cotisation(
         annee         Varchar (4) NOT NULL ,
-        code_adherent Varchar NOT NULL ,
+        code_adherent Varchar (25) NOT NULL ,
         CONSTRAINT pk_Payer_Cotisation PRIMARY KEY (annee ,code_adherent ),
 		CONSTRAINT FK_Payer_Cotisation_annee FOREIGN KEY (annee) REFERENCES ANNEE(annee),
 		CONSTRAINT FK_Payer_Cotisation_code_adherent FOREIGN KEY (code_adherent) REFERENCES ADHERENT(code_adherent)
 );
 
 CREATE TABLE Realiser(
-        code_adherent  Varchar   NOT NULL ,
+        code_adherent  Varchar (25)   NOT NULL ,
         code_marche    Varchar (25) NOT NULL ,
       CONSTRAINT pk_Realiser  PRIMARY KEY (code_adherent ,code_marche ),
 	  CONSTRAINT FK_Realiser_code_adherent FOREIGN KEY (code_adherent) REFERENCES ADHERENT(code_adherent),
 	  CONSTRAINT FK_Realiser_code_march FOREIGN KEY (code_marche) REFERENCES Marche(code_marche)
 );
-
-
-
