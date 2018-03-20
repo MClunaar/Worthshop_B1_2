@@ -34,7 +34,7 @@ function authenticateUser($login, $password, PDO $bdd = null)
     {
         try
         {
-            $stmt = $bdd->prepare ("SELECT * FROM employee WHERE login=:pLogin");
+            $stmt = $bdd->prepare ("SELECT * FROM employee WHERE login=:pLogin"); //TODO modif employee par user
             $stmt->bindParam(':pLogin', $login);
             if ($stmt->execute()) {
                 $user = $stmt->fetch(PDO::FETCH_OBJ);
@@ -53,7 +53,7 @@ function authenticateUser($login, $password, PDO $bdd = null)
 
     return null;
 }
-
+/* //TODO est ce qu c'est encore utile ?
 function getUniqueStates(PDO $bdd = null)
 {
     if ($bdd == null)
@@ -74,8 +74,9 @@ function getUniqueStates(PDO $bdd = null)
 
     return null;
 }
+*/
 
-function getPublishers($nom, $state,PDO $bdd = null) {
+function getUSER($nom, $state,PDO $bdd = null) {
     $publishers = null;
 
     if ($bdd == null)
@@ -85,10 +86,10 @@ function getPublishers($nom, $state,PDO $bdd = null) {
 
     if ($bdd)
     {
-        // connexion r�ussie
+        // connexion reussie
         // La requete de base
         $query = "SELECT * FROM publishers AS p, country AS c WHERE p.idCountry = c.id";
-        // On r�cup�re tout le contenu de la table
+        // On recupere tout le contenu de la table
         if (empty($state) && empty($nom)) {
             // Tous les enregistrements
             $stmt = $bdd->prepare($query);
@@ -172,7 +173,7 @@ function updatePublisher($id, $pub_name, $city, $state, $cbCountry, PDO $bdd = n
 }
 
 
-
+/* //TODO est ce qu c'est encore utile ?
 function getContries(PDO $bdd = null)
 {
     $countries = null;
@@ -194,6 +195,7 @@ function getContries(PDO $bdd = null)
 
     return $countries;
 }
+*/
 
 /***************************
  **
