@@ -1,82 +1,242 @@
-drop table Cours;
-drop table Utilisateur;
-drop table Rubrique;
-drop table competence;
-drop table Haut_fait;
-drop table Participe;
-drop table Possede;
-drop table Message;
-drop table commentaire;
+-- phpMyAdmin SQL Dump
+-- version 4.7.4
+-- https://www.phpmyadmin.net/
+--
+-- Hôte : 127.0.0.1:3306
+-- Généré le :  mar. 20 mars 2018 à 08:12
+-- Version du serveur :  5.7.19
+-- Version de PHP :  7.0.23
+
+SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
+SET AUTOCOMMIT = 0;
+START TRANSACTION;
+SET time_zone = "+00:00";
 
 
-#------------------------------------------------------------
-# Table: Cours 
-CREATE TABLE Cours(id_cours      int (11) NOT NULL ,date_cours    Date ,horaire       Varchar (25) ,texte_cours   Longtext ,id_competence Int NOT NULL  )ENGINE=InnoDB;
-#------------------------------------------------------------
+/*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
+/*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
+/*!40101 SET @OLD_COLLATION_CONNECTION=@@COLLATION_CONNECTION */;
+/*!40101 SET NAMES utf8mb4 */;
 
-#------------------------------------------------------------
-# Table: Utilisateur
-CREATE TABLE Utilisateur(id_user         int (11) NOT NULL , nom             Varchar (25) , prenom          Varchar (25) , pseudo          Varchar (25) ,mail            Varchar (25) , date_create     Date , num_tel         Int , avatar          Varchar (25) , niveau_user     Int , exp             BigInt , cours_propose   Int , cours_participe Int  , id_cours        Int NOT NULL , id_rubrique     Int NOT NULL , id_hf           Int NOT NULL )ENGINE=InnoDB;
-#------------------------------------------------------------
+--
+-- Base de données :  `udepsi`
+--
 
-#------------------------------------------------------------
-# Table: Rubrique
-CREATE TABLE Rubrique(  id_rubrique   int (11)  NOT NULL , image         Varchar (100) ,video         Varchar (100) , texte_r       Longtext , note_r        Float , id_competence Int NOT NULL ,  id_user       Int NOT NULL )ENGINE=InnoDB;
-#------------------------------------------------------------
+-- --------------------------------------------------------
 
-#------------------------------------------------------------
-# Table: Competence
-CREATE TABLE Competence( id_competence  int (11) NOT NULL , nom_competence Varchar (25) ,theme          Varchar (25))ENGINE=InnoDB;
-#------------------------------------------------------------
+--
+-- Structure de la table `commentaire`
+--
 
-#------------------------------------------------------------
-# Table: Haut-fait
-CREATE TABLE Haut_fait( id_hf     int (11) NOT NULL , nom_hf    Varchar (25) , value_exp Int )ENGINE=InnoDB;
-#------------------------------------------------------------
+DROP TABLE IF EXISTS `commentaire`;
+CREATE TABLE IF NOT EXISTS `commentaire` (
+  `id_commentaire` int(11) NOT NULL AUTO_INCREMENT,
+  `commentaire` longtext NOT NULL,
+  `note_c` float NOT NULL,
+  `date_commentaire` date NOT NULL,
+  `id_rubrique` int(11) NOT NULL,
+  `id_user_posteur` int(11) NOT NULL,
+  `id_user_noteur` int(11) NOT NULL,
+  PRIMARY KEY (`id_commentaire`),
+  KEY `FK_commentaire_id_rubrique` (`id_rubrique`),
+  KEY `FK_commentaire_id_user_posteur` (`id_user_posteur`),
+  KEY `FK_commentaire_id_user_noteur` (`id_user_noteur`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-#------------------------------------------------------------
-# Table: Participe
-CREATE TABLE Participe(id_cours Int NOT NULL ,id_user  Int NOT NULL )ENGINE=InnoDB;
-#------------------------------------------------------------
+-- --------------------------------------------------------
 
-#------------------------------------------------------------
-# Table: Possede
-CREATE TABLE Possede( niveau        Int ,  id_competence Int NOT NULL , id_user       Int NOT NULL )ENGINE=InnoDB;
-#------------------------------------------------------------
+--
+-- Structure de la table `competence`
+--
 
-#------------------------------------------------------------
-# Table: Message
-CREATE TABLE Message ( message             Varchar (250) , date_message        Date , id_user_envoie             Int NOT NULL , id_user_recoie Int NOT NULL )ENGINE=InnoDB;
-#------------------------------------------------------------
+DROP TABLE IF EXISTS `competence`;
+CREATE TABLE IF NOT EXISTS `competence` (
+  `id_competence` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_competence` varchar(25) DEFAULT NULL,
+  `theme` varchar(25) DEFAULT NULL,
+  PRIMARY KEY (`id_competence`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-#------------------------------------------------------------
-# Table: commentaire
-CREATE TABLE commentaire( id_commentaire      int (11)  NOT NULL , commentaire         Longtext NOT NULL , note_c              Float NOT NULL , date_commentaire    Date NOT NULL , id_rubrique         Int NOT NULL ,id_user_posteur        Int NOT NULL , id_user_noteur Int NOT NULL )ENGINE=InnoDB;
-#------------------------------------------------------------
+-- --------------------------------------------------------
 
-ALTER TABLE Cours ADD CONSTRAINT pk_id_cours PRIMARY KEY (id_cours);
-ALTER TABLE Utilisateur ADD CONSTRAINT pk_id_user PRIMARY KEY (id_user);
-ALTER TABLE Rubrique ADD CONSTRAINT pk_id_rubrique PRIMARY KEY (id_rubrique);
-ALTER TABLE Competence ADD CONSTRAINT pk_competence PRIMARY KEY (id_competence);
-ALTER TABLE Haut_fait ADD CONSTRAINT pk_id_hf PRIMARY KEY (id_hf);
-ALTER TABLE Participe ADD CONSTRAINT pk_participe PRIMARY KEY (id_user,id_cours);
-ALTER TABLE Possede ADD CONSTRAINT pk_possede PRIMARY KEY (id_competence, id_user);
-ALTER TABLE Message ADD CONSTRAINT pk_message PRIMARY KEY (id_user_envoie,id_user_recoie);
-ALTER TABLE commentaire ADD CONSTRAINT pk_commentaire PRIMARY KEY (id_rubrique, id_user_posteur, id_user_noteur);
+--
+-- Structure de la table `cours`
+--
 
+DROP TABLE IF EXISTS `cours`;
+CREATE TABLE IF NOT EXISTS `cours` (
+  `id_cours` int(11) NOT NULL AUTO_INCREMENT,
+  `date_cours` date DEFAULT NULL,
+  `horaire` varchar(25) DEFAULT NULL,
+  `texte_cours` longtext,
+  `id_competence` int(11) NOT NULL,
+  PRIMARY KEY (`id_cours`),
+  KEY `FK_Cours_id_competence` (`id_competence`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
-ALTER TABLE Cours ADD CONSTRAINT FK_Cours_id_competence FOREIGN KEY (id_competence) REFERENCES Competence(id_competence);
-ALTER TABLE Utilisateur ADD CONSTRAINT FK_Utilisateur_id_cours FOREIGN KEY (id_cours) REFERENCES Cours(id_cours);
-ALTER TABLE Utilisateur ADD CONSTRAINT FK_Utilisateur_id_rubrique_evaluer FOREIGN KEY (id_rubrique) REFERENCES Rubrique(id_rubrique);
-ALTER TABLE Utilisateur ADD CONSTRAINT FK_Utilisateur_id_hf FOREIGN KEY (id_hf) REFERENCES Haut_fait(id_hf);
-ALTER TABLE Rubrique ADD CONSTRAINT FK_Rubrique_id_competence FOREIGN KEY (id_competence) REFERENCES Competence(id_competence);
-ALTER TABLE Rubrique ADD CONSTRAINT FK_Rubrique_id_user_createur FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user);
-ALTER TABLE Participe ADD CONSTRAINT FK_Participe_id_cours FOREIGN KEY (id_cours) REFERENCES Cours(id_cours);
-ALTER TABLE Participe ADD CONSTRAINT FK_Participe_id_user FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user);
-ALTER TABLE Possede ADD CONSTRAINT FK_Possede_id_competence FOREIGN KEY (id_competence) REFERENCES Competence(id_competence);
-ALTER TABLE Possede ADD CONSTRAINT FK_Possede_id_user FOREIGN KEY (id_user) REFERENCES Utilisateur(id_user);
-ALTER TABLE Message ADD CONSTRAINT FK_Message_id_user_envoie FOREIGN KEY (id_user_envoie) REFERENCES Utilisateur(id_user);
-ALTER TABLE Message ADD CONSTRAINT FK_Message_id_user_recoie FOREIGN KEY (id_user_recoie) REFERENCES Utilisateur(id_user);
-ALTER TABLE commentaire ADD CONSTRAINT FK_commentaire_id_rubrique FOREIGN KEY (id_rubrique) REFERENCES Rubrique(id_rubrique);
-ALTER TABLE commentaire ADD CONSTRAINT FK_commentaire_id_user_posteur FOREIGN KEY (id_user_posteur) REFERENCES Utilisateur(id_user);
-ALTER TABLE commentaire ADD CONSTRAINT FK_commentaire_id_user_noteur FOREIGN KEY (id_user_noteur) REFERENCES Utilisateur(id_user);
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `haut_fait`
+--
+
+DROP TABLE IF EXISTS `haut_fait`;
+CREATE TABLE IF NOT EXISTS `haut_fait` (
+  `id_hf` int(11) NOT NULL AUTO_INCREMENT,
+  `nom_hf` varchar(25) DEFAULT NULL,
+  `value_exp` int(11) DEFAULT NULL,
+  PRIMARY KEY (`id_hf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `message`
+--
+
+DROP TABLE IF EXISTS `message`;
+CREATE TABLE IF NOT EXISTS `message` (
+  `message` varchar(250) DEFAULT NULL,
+  `date_message` date DEFAULT NULL,
+  `id_user_envoie` int(11) NOT NULL,
+  `id_user_recoie` int(11) NOT NULL,
+  KEY `FK_Message_id_user_envoie` (`id_user_envoie`),
+  KEY `FK_Message_id_user_recoie` (`id_user_recoie`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `participe`
+--
+
+DROP TABLE IF EXISTS `participe`;
+CREATE TABLE IF NOT EXISTS `participe` (
+  `id_cours` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  KEY `FK_Participe_id_cours` (`id_cours`),
+  KEY `FK_Participe_id_user` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `possede`
+--
+
+DROP TABLE IF EXISTS `possede`;
+CREATE TABLE IF NOT EXISTS `possede` (
+  `niveau` int(11) DEFAULT NULL,
+  `id_competence` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  KEY `FK_Possede_id_competence` (`id_competence`),
+  KEY `FK_Possede_id_user` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `rubrique`
+--
+
+DROP TABLE IF EXISTS `rubrique`;
+CREATE TABLE IF NOT EXISTS `rubrique` (
+  `id_rubrique` int(11) NOT NULL AUTO_INCREMENT,
+  `image` varchar(100) DEFAULT NULL,
+  `video` varchar(100) DEFAULT NULL,
+  `texte_r` longtext,
+  `note_r` float DEFAULT NULL,
+  `id_competence` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  PRIMARY KEY (`id_rubrique`),
+  KEY `FK_Rubrique_id_competence` (`id_competence`),
+  KEY `FK_Rubrique_id_user_createur` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `utilisateur`
+--
+
+DROP TABLE IF EXISTS `utilisateur`;
+CREATE TABLE IF NOT EXISTS `utilisateur` (
+  `id_user` int(11) NOT NULL AUTO_INCREMENT,
+  `nom` varchar(25) DEFAULT NULL,
+  `prenom` varchar(25) DEFAULT NULL,
+  `pseudo` varchar(25) DEFAULT NULL,
+  `mail` varchar(25) DEFAULT NULL,
+  `date_create` date DEFAULT NULL,
+  `num_tel` int(11) DEFAULT NULL,
+  `avatar` varchar(25) DEFAULT NULL,
+  `niveau_user` int(11) DEFAULT NULL,
+  `exp` bigint(20) DEFAULT NULL,
+  `cours_propose` int(11) DEFAULT NULL,
+  `cours_participe` int(11) DEFAULT NULL,
+  `id_cours` int(11) NOT NULL,
+  `id_rubrique` int(11) NOT NULL,
+  `id_hf` int(11) NOT NULL,
+  PRIMARY KEY (`id_user`),
+  KEY `FK_Utilisateur_id_cours` (`id_cours`),
+  KEY `FK_Utilisateur_id_rubrique_evaluer` (`id_rubrique`),
+  KEY `FK_Utilisateur_id_hf` (`id_hf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Contraintes pour les tables déchargées
+--
+
+--
+-- Contraintes pour la table `commentaire`
+--
+ALTER TABLE `commentaire`
+  ADD CONSTRAINT `FK_commentaire_id_rubrique` FOREIGN KEY (`id_rubrique`) REFERENCES `rubrique` (`id_rubrique`),
+  ADD CONSTRAINT `FK_commentaire_id_user_noteur` FOREIGN KEY (`id_user_noteur`) REFERENCES `utilisateur` (`id_user`),
+  ADD CONSTRAINT `FK_commentaire_id_user_posteur` FOREIGN KEY (`id_user_posteur`) REFERENCES `utilisateur` (`id_user`);
+
+--
+-- Contraintes pour la table `cours`
+--
+ALTER TABLE `cours`
+  ADD CONSTRAINT `FK_Cours_id_competence` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id_competence`);
+
+--
+-- Contraintes pour la table `message`
+--
+ALTER TABLE `message`
+  ADD CONSTRAINT `FK_Message_id_user_envoie` FOREIGN KEY (`id_user_envoie`) REFERENCES `utilisateur` (`id_user`),
+  ADD CONSTRAINT `FK_Message_id_user_recoie` FOREIGN KEY (`id_user_recoie`) REFERENCES `utilisateur` (`id_user`);
+
+--
+-- Contraintes pour la table `participe`
+--
+ALTER TABLE `participe`
+  ADD CONSTRAINT `FK_Participe_id_cours` FOREIGN KEY (`id_cours`) REFERENCES `cours` (`id_cours`),
+  ADD CONSTRAINT `FK_Participe_id_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
+
+--
+-- Contraintes pour la table `possede`
+--
+ALTER TABLE `possede`
+  ADD CONSTRAINT `FK_Possede_id_competence` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id_competence`),
+  ADD CONSTRAINT `FK_Possede_id_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
+
+--
+-- Contraintes pour la table `rubrique`
+--
+ALTER TABLE `rubrique`
+  ADD CONSTRAINT `FK_Rubrique_id_competence` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id_competence`),
+  ADD CONSTRAINT `FK_Rubrique_id_user_createur` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
+
+--
+-- Contraintes pour la table `utilisateur`
+--
+ALTER TABLE `utilisateur`
+  ADD CONSTRAINT `FK_Utilisateur_id_cours` FOREIGN KEY (`id_cours`) REFERENCES `cours` (`id_cours`),
+  ADD CONSTRAINT `FK_Utilisateur_id_hf` FOREIGN KEY (`id_hf`) REFERENCES `haut_fait` (`id_hf`),
+  ADD CONSTRAINT `FK_Utilisateur_id_rubrique_evaluer` FOREIGN KEY (`id_rubrique`) REFERENCES `rubrique` (`id_rubrique`);
+COMMIT;
+
+/*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+/*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
+/*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
