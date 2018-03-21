@@ -10,6 +10,7 @@
 <body>
     <div class="container-fluid">    
         <div class="row strip">
+
             <div class="col-3">
                 <div class="row strip">
                     <div class="col-10 connexion">
@@ -32,9 +33,24 @@
             </div> 
 
             <div class="col-6 ">
-                <div class="searchbar">
+                <div class="row">
+                    <div class="col-1">
+                         
+                    </div>
+                    <div class="col-11">
+                        <div class="searchbar">
+                            <div class="search">
+                                
+                            </div>
+                            <div class="submit">
 
-                </div> 
+                            </div>
+                            <div class="category">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
             </div> 
             
             <div class="col-3">
@@ -51,6 +67,7 @@
                     </div>
                 </div>
             </div>
+
         </div>   
 
         <div class="row main" style="margin-left=1vw !important">
@@ -61,6 +78,9 @@
                         <div class="course-title">
                             Titre du cours
                         </div>
+                        <div class="course-bottom">
+                            Par : Un fils de pute
+                        </div>
 
                         <div class="course-line">
                         </div>
@@ -68,21 +88,15 @@
                         <div class="course-desc">
                             Lorem ipsum dolot sir amet deus ameno tot si veritum rectum nostrum i bien ein berliner
                         </div>
-
-                        <div class="course-line">
-                        </div>
-
-                        <div class="course-bottom">
-                            Par : Un fils de pute
-                            <img class="course-link" src="php.png"/> 
-                        </div>
                     </div>
                     <div class="course">
-
                         <img class="course-tech" src="php.png"/> 
                         <div class="course-title">
                             Titre du cours
                         </div>
+                        <div class="course-bottom">
+                            Par : Un fils de pute
+                        </div>
 
                         <div class="course-line">
                         </div>
@@ -90,21 +104,15 @@
                         <div class="course-desc">
                             Lorem ipsum dolot sir amet deus ameno tot si veritum rectum nostrum i bien ein berliner
                         </div>
-
-                        <div class="course-line">
-                        </div>
-
-                        <div class="course-bottom">
-                            Par : Un fils de pute
-                            <img class="course-link" src="php.png"/> 
-                        </div>
                     </div>
                     <div class="course">
-
                         <img class="course-tech" src="php.png"/> 
                         <div class="course-title">
                             Titre du cours
                         </div>
+                        <div class="course-bottom">
+                            Par : Un fils de pute
+                        </div>
 
                         <div class="course-line">
                         </div>
@@ -112,21 +120,15 @@
                         <div class="course-desc">
                             Lorem ipsum dolot sir amet deus ameno tot si veritum rectum nostrum i bien ein berliner
                         </div>
-
-                        <div class="course-line">
-                        </div>
-
-                        <div class="course-bottom">
-                            Par : Un fils de pute
-                            <img class="course-link" src="php.png"/> 
-                        </div>
                     </div>
                     <div class="course">
-
                         <img class="course-tech" src="php.png"/> 
                         <div class="course-title">
                             Titre du cours
                         </div>
+                        <div class="course-bottom">
+                            Par : Un fils de pute
+                        </div>
 
                         <div class="course-line">
                         </div>
@@ -134,20 +136,15 @@
                         <div class="course-desc">
                             Lorem ipsum dolot sir amet deus ameno tot si veritum rectum nostrum i bien ein berliner
                         </div>
-
-                        <div class="course-line">
-                        </div>
-
-                        <div class="course-bottom">
-                            Par : Un fils de pute
-                            <img class="course-link" src="php.png"/> 
-                        </div>
-                    </div><div class="course">
-
+                    </div>
+                    <div class="course">
                         <img class="course-tech" src="php.png"/> 
                         <div class="course-title">
                             Titre du cours
                         </div>
+                        <div class="course-bottom">
+                            Par : Un fils de pute
+                        </div>
 
                         <div class="course-line">
                         </div>
@@ -155,42 +152,14 @@
                         <div class="course-desc">
                             Lorem ipsum dolot sir amet deus ameno tot si veritum rectum nostrum i bien ein berliner
                         </div>
-
-                        <div class="course-line">
-                        </div>
-
-                        <div class="course-bottom">
-                            Par : Un fils de pute
-                            <img class="course-link" src="php.png"/> 
-                        </div>
                     </div>
                     <div class="course">
-
                         <img class="course-tech" src="php.png"/> 
                         <div class="course-title">
                             Titre du cours
                         </div>
-
-                        <div class="course-line">
-                        </div>
-
-                        <div class="course-desc">
-                            Lorem ipsum dolot sir amet deus ameno tot si veritum rectum nostrum i bien ein berliner
-                        </div>
-
-                        <div class="course-line">
-                        </div>
-
                         <div class="course-bottom">
                             Par : Un fils de pute
-                            <img class="course-link" src="php.png"/> 
-                        </div>
-                    </div>
-                    <div class="course">
-
-                        <img class="course-tech" src="php.png"/> 
-                        <div class="course-title">
-                            Titre du cours
                         </div>
 
                         <div class="course-line">
@@ -199,43 +168,8 @@
                         <div class="course-desc">
                             Lorem ipsum dolot sir amet deus ameno tot si veritum rectum nostrum i bien ein berliner
                         </div>
-
-                        <div class="course-line">
-                        </div>
-
-                        <div class="course-bottom">
-                            Par : Un fils de pute
-                            <img class="course-link" src="php.png"/> 
-                        </div>
                     </div>
 
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
-                    <div class="course">
-
-                    </div>
                 </div>
             </div>
 
