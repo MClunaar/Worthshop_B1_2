@@ -33,21 +33,27 @@
             </div> 
 
             <div class="col-6 ">
-                <div class="row">
+                <div class="row" style="height:5vw">
                     <div class="col-1">
                          
                     </div>
                     <div class="col-11">
                         <div class="searchbar">
-                            <div class="search">
-                                
-                            </div>
-                            <div class="submit">
-
-                            </div>
-                            <div class="category">
-
-                            </div>
+                            <form action="action_page.php" class="form">
+                                <input class="search" type="text" placeholder="Search.."  name="search">
+                                <div class="others">
+                                    
+                                    <button type="submit" class="submit">
+                                        <img class="magnifier" src="search.svg"/>
+                                    </button>
+                                    <select class="category">
+                                        <option class="option" value="volvo">Volvo</option>
+                                        <option class="option" value="saab">Saab</option>
+                                        <option class="option" value="opel">Opel</option>
+                                        <option class="option" value="audi">Audi</option>
+                                    </select>
+                                </div>
+                            </form>
                         </div>
                     </div>
                 </div>
@@ -79,7 +85,7 @@
                             Titre du cours
                         </div>
                         <div class="course-bottom">
-                            Par : Un fils de pute
+                            Par : gabriel
                         </div>
 
                         <div class="course-line">
@@ -95,7 +101,7 @@
                             Titre du cours
                         </div>
                         <div class="course-bottom">
-                            Par : Un fils de pute
+                            Par : gabriel
                         </div>
 
                         <div class="course-line">
@@ -111,7 +117,7 @@
                             Titre du cours
                         </div>
                         <div class="course-bottom">
-                            Par : Un fils de pute
+                            Par : gabriel
                         </div>
 
                         <div class="course-line">
@@ -127,7 +133,7 @@
                             Titre du cours
                         </div>
                         <div class="course-bottom">
-                            Par : Un fils de pute
+                            Par : gabriel
                         </div>
 
                         <div class="course-line">
@@ -143,7 +149,7 @@
                             Titre du cours
                         </div>
                         <div class="course-bottom">
-                            Par : Un fils de pute
+                            Par : gabriel
                         </div>
 
                         <div class="course-line">
@@ -159,7 +165,7 @@
                             Titre du cours
                         </div>
                         <div class="course-bottom">
-                            Par : Un fils de pute
+                            Par : gabriel
                         </div>
 
                         <div class="course-line">
