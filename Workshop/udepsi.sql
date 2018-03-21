@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mar. 20 mars 2018 à 10:18
+-- Généré le :  mer. 21 mars 2018 à 09:18
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.0.23
 
@@ -25,6 +25,21 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `avatar`
+--
+
+DROP TABLE IF EXISTS `avatar`;
+CREATE TABLE IF NOT EXISTS `avatar` (
+  `id_avatar` int(20) NOT NULL,
+  `perso` varchar(255) NOT NULL,
+  `stuff` varchar(255) NOT NULL,
+  `id_u` int(20) NOT NULL,
+  KEY `id_u` (`id_u`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `commentaire`
 --
 
@@ -32,7 +47,7 @@ DROP TABLE IF EXISTS `commentaire`;
 CREATE TABLE IF NOT EXISTS `commentaire` (
   `id_commentaire` int(11) NOT NULL AUTO_INCREMENT,
   `commentaire` longtext NOT NULL,
-  `date_commentaire` varchar(255) NOT NULL,
+  `date_commentaire` date NOT NULL,
   `id_rubrique` int(11) NOT NULL,
   `id_user_posteur` int(11) NOT NULL,
   PRIMARY KEY (`id_commentaire`),
@@ -45,8 +60,22 @@ CREATE TABLE IF NOT EXISTS `commentaire` (
 --
 
 INSERT INTO `commentaire` (`id_commentaire`, `commentaire`, `date_commentaire`, `id_rubrique`, `id_user_posteur`) VALUES
-(1, 'Je trouve cette base de données vraiment bien', '15/04/2018', 1, 2),
-(2, 'les cours sont vraiment bien à l\'EPSI', '30/03/2018', 1, 1);
+(1, 'Je trouve cette base de données vraiment bien', '2015-04-18', 1, 2),
+(2, 'les cours sont vraiment bien à l\'EPSI', '2030-03-18', 1, 1);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `commentaire_poste`
+--
+
+DROP TABLE IF EXISTS `commentaire_poste`;
+CREATE TABLE IF NOT EXISTS `commentaire_poste` (
+  `id_u` int(20) NOT NULL,
+  `id_c` int(20) NOT NULL,
+  UNIQUE KEY `id_c` (`id_c`),
+  KEY `id_u` (`id_u`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -118,7 +147,7 @@ INSERT INTO `competence_lvl` (`niveau`, `id_competence`, `id_user`) VALUES
 DROP TABLE IF EXISTS `cours`;
 CREATE TABLE IF NOT EXISTS `cours` (
   `id_cours` int(11) NOT NULL AUTO_INCREMENT,
-  `date_cours` varchar(255) DEFAULT NULL,
+  `date_cours` date NOT NULL,
   `horaire` varchar(25) DEFAULT NULL,
   `texte_cours` longtext,
   `id_competence` int(11) DEFAULT NULL,
@@ -131,10 +160,48 @@ CREATE TABLE IF NOT EXISTS `cours` (
 --
 
 INSERT INTO `cours` (`id_cours`, `date_cours`, `horaire`, `texte_cours`, `id_competence`) VALUES
-(1, '15/06/2018', '16h30', 'Voici un petit cours en PHP pour les débutants', 1),
-(2, '13/03/2018', '10h00', 'Un cours de C pour apprendre la programmation objet', 8),
-(3, '30/03/2018', '15h00', 'Un cours en HTML pour les débutants en développement web', 2),
-(4, '05/04/2018', '12h00', 'Un cours d\'IOS pour le développement d\'application mobile sur iPhone', 11);
+(1, '2015-06-18', '16h30', 'Voici un petit cours en PHP pour les débutants', 1),
+(2, '2013-03-18', '10h00', 'Un cours de C pour apprendre la programmation objet', 8),
+(3, '2030-03-18', '15h00', 'Un cours en HTML pour les débutants en développement web', 2),
+(4, '2005-04-18', '12h00', 'Un cours d\'IOS pour le développement d\'application mobile sur iPhone', 11);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cours_participe`
+--
+
+DROP TABLE IF EXISTS `cours_participe`;
+CREATE TABLE IF NOT EXISTS `cours_participe` (
+  `id_cours` int(11) NOT NULL,
+  `id_user` int(11) NOT NULL,
+  KEY `FK_Participe_id_cours` (`id_cours`),
+  KEY `FK_Participe_id_user` (`id_user`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Déchargement des données de la table `cours_participe`
+--
+
+INSERT INTO `cours_participe` (`id_cours`, `id_user`) VALUES
+(1, 1),
+(2, 2),
+(2, 1),
+(1, 2);
+
+-- --------------------------------------------------------
+
+--
+-- Structure de la table `cours_propose`
+--
+
+DROP TABLE IF EXISTS `cours_propose`;
+CREATE TABLE IF NOT EXISTS `cours_propose` (
+  `id_u` int(20) NOT NULL,
+  `id_c` int(11) NOT NULL,
+  UNIQUE KEY `id_u` (`id_u`),
+  UNIQUE KEY `id_c` (`id_c`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -168,45 +235,54 @@ INSERT INTO `haut_fait` (`id_hf`, `nom_hf`, `value_exp`) VALUES
 
 DROP TABLE IF EXISTS `message`;
 CREATE TABLE IF NOT EXISTS `message` (
+  `id_message` int(11) NOT NULL AUTO_INCREMENT,
   `message` varchar(250) DEFAULT NULL,
-  `date_message` varchar(255) DEFAULT NULL,
+  `date_message` date DEFAULT NULL,
   `id_user_envoie` int(11) NOT NULL,
   `id_user_recoie` int(11) NOT NULL,
+  PRIMARY KEY (`id_message`),
   KEY `FK_Message_id_user_envoie` (`id_user_envoie`),
   KEY `FK_Message_id_user_recoie` (`id_user_recoie`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `message`
 --
 
-INSERT INTO `message` (`message`, `date_message`, `id_user_envoie`, `id_user_recoie`) VALUES
-('Bonjour, veux-tu suivre les cours de PHP avec moi ?', '20/03/2018', 1, 2),
-('Bonjour, j\'aimerai vraiment venir suivre ce cours sur Open Classroom', '20/03/2018', 2, 1);
+INSERT INTO `message` (`id_message`, `message`, `date_message`, `id_user_envoie`, `id_user_recoie`) VALUES
+(1, 'Bonjour, veux-tu suivre les cours de PHP avec moi ?', '2020-03-18', 1, 2),
+(2, 'Bonjour, j\'aimerai vraiment venir suivre ce cours sur Open Classroom', '2020-03-18', 2, 1);
 
 -- --------------------------------------------------------
 
 --
--- Structure de la table `participe`
+-- Structure de la table `note_rubrique`
 --
 
-DROP TABLE IF EXISTS `participe`;
-CREATE TABLE IF NOT EXISTS `participe` (
-  `id_cours` int(11) NOT NULL,
-  `id_user` int(11) NOT NULL,
-  KEY `FK_Participe_id_cours` (`id_cours`),
-  KEY `FK_Participe_id_user` (`id_user`)
+DROP TABLE IF EXISTS `note_rubrique`;
+CREATE TABLE IF NOT EXISTS `note_rubrique` (
+  `id_u` int(20) NOT NULL,
+  `id_r` int(20) NOT NULL,
+  `note` int(20) NOT NULL,
+  KEY `id_u` (`id_u`),
+  KEY `id_r` (`id_r`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
+-- --------------------------------------------------------
+
 --
--- Déchargement des données de la table `participe`
+-- Structure de la table `note_user`
 --
 
-INSERT INTO `participe` (`id_cours`, `id_user`) VALUES
-(1, 1),
-(2, 2),
-(2, 1),
-(1, 2);
+DROP TABLE IF EXISTS `note_user`;
+CREATE TABLE IF NOT EXISTS `note_user` (
+  `id_u_note` int(20) NOT NULL,
+  `id_u_notant` int(20) NOT NULL,
+  `note` int(20) NOT NULL,
+  `commentaire` varchar(255) NOT NULL,
+  KEY `id_u_note` (`id_u_note`),
+  KEY `id_u_notant` (`id_u_notant`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -238,6 +314,20 @@ INSERT INTO `rubrique` (`id_rubrique`, `image`, `video`, `texte_r`, `id_competen
 -- --------------------------------------------------------
 
 --
+-- Structure de la table `uhf`
+--
+
+DROP TABLE IF EXISTS `uhf`;
+CREATE TABLE IF NOT EXISTS `uhf` (
+  `id_u` int(11) NOT NULL,
+  `id_hf` int(11) NOT NULL,
+  KEY `id_u` (`id_u`),
+  KEY `id_hf` (`id_hf`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
 -- Structure de la table `utilisateur`
 --
 
@@ -246,33 +336,39 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `id_user` int(20) NOT NULL AUTO_INCREMENT,
   `nom` varchar(255) NOT NULL,
   `prenom` varchar(255) NOT NULL,
-  `pseudo` varchar(255) DEFAULT NULL,
+  `pseudo` varchar(255) NOT NULL,
   `mail` varchar(255) DEFAULT NULL,
-  `date_create` varchar(255) DEFAULT NULL,
+  `date_naissance` date DEFAULT NULL,
   `num_tel` varchar(10) DEFAULT NULL,
   `avatar` varchar(25) DEFAULT NULL,
   `niveau_user` int(11) DEFAULT NULL,
   `exp` bigint(20) DEFAULT NULL,
   `cours_propose` int(11) DEFAULT NULL,
   `cours_participe` int(11) DEFAULT NULL,
-  `id_cours` int(11) DEFAULT NULL,
-  `id_hf` int(11) DEFAULT NULL,
-  PRIMARY KEY (`id_user`),
-  KEY `FK_Utilisateur_id_cours` (`id_cours`),
-  KEY `FK_Utilisateur_id_hf` (`id_hf`)
-) ENGINE=InnoDB AUTO_INCREMENT=3 DEFAULT CHARSET=latin1;
+  `mdp` varchar(50) NOT NULL,
+  `date_creation` date DEFAULT NULL,
+  PRIMARY KEY (`id_user`)
+) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
-INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `mail`, `date_create`, `num_tel`, `avatar`, `niveau_user`, `exp`, `cours_propose`, `cours_participe`, `id_cours`, `id_hf`) VALUES
-(1, 'Boyer', 'Clément', 'AeroCloud', 'clementboyer@epsi.fr', '05/03/2018', '0612345678', 'test_avatar', 10, 0, 0, 0, 2, 2),
-(2, 'Martin', 'Gabriel', 'Nigdor', 'gabrielmartin@epsi.fr', '15/03/2018', '0613425678', 'avatar_gab', 15, 0, 2, 3, 3, 3);
+INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `mail`, `date_naissance`, `num_tel`, `avatar`, `niveau_user`, `exp`, `cours_propose`, `cours_participe`, `mdp`, `date_creation`) VALUES
+(1, 'Boyer', 'Clément', 'Aerocloud', 'clementboyer@epsi.fr', '0001-01-01', '0612345678', 'test_avatar', 10, 0, 0, 0, '1234', '1998-03-03'),
+(2, 'Martin', 'Gabriel', 'Nigdor', 'gabrielmartin@epsi.fr', '2006-06-18', '0613425678', 'avatar_gab', 15, 0, 2, 3, '1234', '1999-05-11'),
+(3, 'Prangère', 'Romain', 'Prangerson', 'romainprangere@epsi.fr', NULL, '0611223344', NULL, 20, 130, 3, 5, '1234', '1994-01-11'),
+(4, 'Marignier', 'Vincent', 'vinsmgn', 'vincentmarignier@epsi.fr', '1996-05-06', '0622334455', NULL, NULL, NULL, NULL, NULL, 'abcd', NULL);
 
 --
 -- Contraintes pour les tables déchargées
 --
+
+--
+-- Contraintes pour la table `avatar`
+--
+ALTER TABLE `avatar`
+  ADD CONSTRAINT `avatar_ibfk_1` FOREIGN KEY (`id_u`) REFERENCES `utilisateur` (`id_user`);
 
 --
 -- Contraintes pour la table `commentaire`
@@ -280,6 +376,13 @@ INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `mail`, `date_c
 ALTER TABLE `commentaire`
   ADD CONSTRAINT `FK_commentaire_id_rubrique` FOREIGN KEY (`id_rubrique`) REFERENCES `rubrique` (`id_rubrique`),
   ADD CONSTRAINT `FK_commentaire_id_user_posteur` FOREIGN KEY (`id_user_posteur`) REFERENCES `utilisateur` (`id_user`);
+
+--
+-- Contraintes pour la table `commentaire_poste`
+--
+ALTER TABLE `commentaire_poste`
+  ADD CONSTRAINT `commentaire_poste_ibfk_1` FOREIGN KEY (`id_c`) REFERENCES `commentaire` (`id_commentaire`),
+  ADD CONSTRAINT `commentaire_poste_ibfk_2` FOREIGN KEY (`id_u`) REFERENCES `utilisateur` (`id_user`);
 
 --
 -- Contraintes pour la table `competence_lvl`
@@ -295,6 +398,20 @@ ALTER TABLE `cours`
   ADD CONSTRAINT `FK_Cours_id_competence` FOREIGN KEY (`id_competence`) REFERENCES `competence` (`id_competence`);
 
 --
+-- Contraintes pour la table `cours_participe`
+--
+ALTER TABLE `cours_participe`
+  ADD CONSTRAINT `FK_Participe_id_cours` FOREIGN KEY (`id_cours`) REFERENCES `cours` (`id_cours`),
+  ADD CONSTRAINT `FK_Participe_id_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
+
+--
+-- Contraintes pour la table `cours_propose`
+--
+ALTER TABLE `cours_propose`
+  ADD CONSTRAINT `cours_propose_ibfk_1` FOREIGN KEY (`id_c`) REFERENCES `cours` (`id_cours`),
+  ADD CONSTRAINT `cours_propose_ibfk_2` FOREIGN KEY (`id_u`) REFERENCES `utilisateur` (`id_user`);
+
+--
 -- Contraintes pour la table `message`
 --
 ALTER TABLE `message`
@@ -302,11 +419,18 @@ ALTER TABLE `message`
   ADD CONSTRAINT `FK_Message_id_user_recoie` FOREIGN KEY (`id_user_recoie`) REFERENCES `utilisateur` (`id_user`);
 
 --
--- Contraintes pour la table `participe`
+-- Contraintes pour la table `note_rubrique`
 --
-ALTER TABLE `participe`
-  ADD CONSTRAINT `FK_Participe_id_cours` FOREIGN KEY (`id_cours`) REFERENCES `cours` (`id_cours`),
-  ADD CONSTRAINT `FK_Participe_id_user` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
+ALTER TABLE `note_rubrique`
+  ADD CONSTRAINT `note_rubrique_ibfk_1` FOREIGN KEY (`id_u`) REFERENCES `utilisateur` (`id_user`),
+  ADD CONSTRAINT `note_rubrique_ibfk_2` FOREIGN KEY (`id_r`) REFERENCES `rubrique` (`id_rubrique`);
+
+--
+-- Contraintes pour la table `note_user`
+--
+ALTER TABLE `note_user`
+  ADD CONSTRAINT `note_user_ibfk_1` FOREIGN KEY (`id_u_note`) REFERENCES `utilisateur` (`id_user`),
+  ADD CONSTRAINT `note_user_ibfk_2` FOREIGN KEY (`id_u_notant`) REFERENCES `utilisateur` (`id_user`);
 
 --
 -- Contraintes pour la table `rubrique`
@@ -316,11 +440,11 @@ ALTER TABLE `rubrique`
   ADD CONSTRAINT `FK_Rubrique_id_user_createur` FOREIGN KEY (`id_user`) REFERENCES `utilisateur` (`id_user`);
 
 --
--- Contraintes pour la table `utilisateur`
+-- Contraintes pour la table `uhf`
 --
-ALTER TABLE `utilisateur`
-  ADD CONSTRAINT `FK_Utilisateur_id_cours` FOREIGN KEY (`id_cours`) REFERENCES `cours` (`id_cours`),
-  ADD CONSTRAINT `FK_Utilisateur_id_hf` FOREIGN KEY (`id_hf`) REFERENCES `haut_fait` (`id_hf`);
+ALTER TABLE `uhf`
+  ADD CONSTRAINT `uhf_ibfk_1` FOREIGN KEY (`id_u`) REFERENCES `utilisateur` (`id_user`) ON DELETE CASCADE,
+  ADD CONSTRAINT `uhf_ibfk_2` FOREIGN KEY (`id_hf`) REFERENCES `haut_fait` (`id_hf`) ON DELETE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
