@@ -5,7 +5,7 @@
  * Date: 20/03/2018
  * Time: 13:12
  */
-include_once "fonctions.php";
+include_once "../model/udepsi.php";
 include_once "../html/new_user.php";
 
 if(isset($_POST)){
@@ -19,11 +19,10 @@ if(isset($_POST)){
     $mdp = htmlspecialchars($_POST['mdp']);
 
     //Connexion
-    $bdd= getdatabase();
+    $bdd= getDataBase();
 
     //Requête SQL
-    $stmt = $bdd->prepare ("INSERT INTO utilisateur (nom, prenom, pseudo, mail, date_naissance, num_tel, mdp)
-VALUES(:pnom, :pprenom, :ppseudo, :pmail, :pdatenaiss, :pnum_tel, :pmdp)");
+    $stmt = $bdd->prepare ("INSERT INTO utilisateur (nom, prenom, pseudo, mail, date_naissance, num_tel, mdp) VALUES(:pnom, :pprenom, :ppseudo, :pmail, :pdatenaiss, :pnum_tel, :pmdp)");
     $stmt->bindParam(':pnom', $user_lname);
     $stmt->bindParam(':pprenom',$user_fname);
     $stmt->bindParam(':ppseudo', $pseudo);
@@ -33,11 +32,7 @@ VALUES(:pnom, :pprenom, :ppseudo, :pmail, :pdatenaiss, :pnum_tel, :pmdp)");
     $stmt->bindParam(':pmdp', $mdp);
     $nbInsert = $stmt->execute();
 
-
-
-
-
-
-
+    header("Location: ../view/list_user.php");
 }
+
 

@@ -1,8 +1,3 @@
-<?php
-include_once "../controller/fonctions.php";
-?>
-
-
 <html>
 <h1> Inscription à la plateforme</h1>
 <form method="post" action="../controller/insert_user.php">
