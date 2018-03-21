@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Hôte : 127.0.0.1:3306
--- Généré le :  mer. 21 mars 2018 à 09:18
+-- Généré le :  mer. 21 mars 2018 à 12:20
 -- Version du serveur :  5.7.19
 -- Version de PHP :  7.0.23
 
@@ -346,19 +346,22 @@ CREATE TABLE IF NOT EXISTS `utilisateur` (
   `cours_propose` int(11) DEFAULT NULL,
   `cours_participe` int(11) DEFAULT NULL,
   `mdp` varchar(50) NOT NULL,
-  `date_creation` date DEFAULT NULL,
+  `date_creation` timestamp NOT NULL DEFAULT CURRENT_TIMESTAMP,
   PRIMARY KEY (`id_user`)
-) ENGINE=InnoDB AUTO_INCREMENT=5 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=9 DEFAULT CHARSET=latin1;
 
 --
 -- Déchargement des données de la table `utilisateur`
 --
 
 INSERT INTO `utilisateur` (`id_user`, `nom`, `prenom`, `pseudo`, `mail`, `date_naissance`, `num_tel`, `avatar`, `niveau_user`, `exp`, `cours_propose`, `cours_participe`, `mdp`, `date_creation`) VALUES
-(1, 'Boyer', 'Clément', 'Aerocloud', 'clementboyer@epsi.fr', '0001-01-01', '0612345678', 'test_avatar', 10, 0, 0, 0, '1234', '1998-03-03'),
-(2, 'Martin', 'Gabriel', 'Nigdor', 'gabrielmartin@epsi.fr', '2006-06-18', '0613425678', 'avatar_gab', 15, 0, 2, 3, '1234', '1999-05-11'),
-(3, 'Prangère', 'Romain', 'Prangerson', 'romainprangere@epsi.fr', NULL, '0611223344', NULL, 20, 130, 3, 5, '1234', '1994-01-11'),
-(4, 'Marignier', 'Vincent', 'vinsmgn', 'vincentmarignier@epsi.fr', '1996-05-06', '0622334455', NULL, NULL, NULL, NULL, NULL, 'abcd', NULL);
+(1, 'Boyer', 'Clément', 'Aerocloud', 'clementboyer@epsi.fr', '0001-01-01', '0612345678', 'test_avatar', 10, 0, 0, 0, '1234', '1998-03-02 23:00:00'),
+(2, 'Martin', 'Gabriel', 'Nigdor', 'gabrielmartin@epsi.fr', '2006-06-18', '0613425678', 'avatar_gab', 15, 0, 2, 3, '1234', '1999-05-10 22:00:00'),
+(3, 'Prangère', 'Romain', 'Prangerson', 'romainprangere@epsi.fr', NULL, '0611223344', NULL, 20, 130, 3, 5, '1234', '1994-01-10 23:00:00'),
+(5, 'Marignier', 'Vincent', 'vinsmgn', 'vincentmarignier@epsi.fr', '1996-05-06', '0622334455', NULL, NULL, NULL, NULL, NULL, '1234', '2018-03-21 10:58:58'),
+(6, 'Calmes', 'Mathéo', 'matyrox', 'matheocalmes@epsi.fr', '1999-02-02', '0612345690', NULL, NULL, NULL, NULL, NULL, 'abcd', '2018-03-21 10:58:58'),
+(7, 'Gimenez', 'Tony', 'tonytony', 'tonygimenez@epsi.fr', '2012-11-20', '0630030545', NULL, NULL, NULL, NULL, NULL, '1234', '2018-03-21 10:58:58'),
+(8, 'Figueiredo', 'Adrien', 'trobyss', 'adrienf@epsi.fr', '1998-03-30', '0600000000', NULL, NULL, NULL, NULL, NULL, 'e2fc714c4727ee9395f324cd2e7f331f', '2018-03-21 11:16:23');
 
 --
 -- Contraintes pour les tables déchargées
