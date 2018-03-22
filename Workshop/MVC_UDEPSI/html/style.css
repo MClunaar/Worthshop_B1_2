@@ -347,6 +347,86 @@ a {
     margin-right: 1%;
 }
 
+.register_form {
+    width: 100% !important;
+    height: 44vw;
+    background-color: rgb(255, 255, 255);
+    box-shadow: 4px 4px 20px rgb(177, 177, 177) !important;
+    display: inline-block;
+    margin-top:2vw;
+    margin-bottom:2vw;
+    overflow-y: hidden;
+    line-height: 2.5vw;
+    text-align: center;
+    line-height: 2vw;
+}
+
+.void {
+    height: 5vw;
+    width: 100%;
+    float: left;
+}
+
+.register_form p {
+    margin:auto;
+}
+
+.register_form label {
+    margin-top: 2%;
+    margin-bottom:0%;
+    font-size: 1vw;
+    color: #474747;
+    font-weight: 200;
+}
+
+.register_form input {
+    text-align: center;
+    color: #474747;
+    font-size: 1.1vw;
+}
+
+.btn_accueil {
+    height: 100%;
+    width: 100%;
+    color: white;
+    font-weight: 200;
+    font-size: 1.5vw;
+    font-family: "Segoe UI";
+    line-height: 1.8vw;
+    padding-top:4%;
+    padding-left: 10%;
+    padding-right: 10%;
+    float: left;
+}
+
+.form_btn {
+    border: solid rgb(187, 187, 187) 1px;
+    border-radius: 4px;
+    background-color: rgb(255, 255, 255);
+}
+
+.register_title {
+    font-size: 3vw;
+    font-family: "Ubuntu";
+    color: rgb(29, 29, 123);
+    float:left;
+    margin-left:4.5%;
+    margin-top:1%;
+    width: 90%;
+    height: 100%;
+
+    text-shadow:
+    -2px -2px 0 rgb(255, 255, 255),
+    2px -2px 0 rgb(255, 255, 255),
+    -2px 2px 0 rgb(255, 255, 255),
+    2px 2px 0 rgb(255, 255, 255); 
+}
+
+.form_btn:hover {
+    background-color: rgb(226, 226, 226);
+    transition: 0.4s;
+}
+
 @media screen and (max-width:1050px){
     .row{
         flex-wrap:nowrap!important;
